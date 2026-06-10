@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Yiyang91/reddit-SEO-workflow/schemas/project-profile.schema.json",
+  "title": "Reddit Workflow Project Profile",
+  "type": "object",
+  "required": ["schema_version", "project", "paths", "product", "reddit", "approvals"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "project": {
+      "type": "object",
+      "required": ["name", "summary", "target_users", "stage", "language"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "summary": {"type": "string"},
+        "target_users": {"type": "array", "items": {"type": "string"}},
+        "stage": {"type": "string"},
+        "language": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "paths": {
+      "type": "object",
+      "required": ["workflow_root", "primary_product_sources", "derived_product_sources"],
+      "properties": {
+        "workflow_root": {"type": "string"},
+        "primary_product_sources": {"type": "array", "items": {"type": "string"}},
+        "derived_product_sources": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "product": {
+      "type": "object",
+      "required": ["feature_id_prefix", "forbidden_claims", "sensitive_topics"],
+      "properties": {
+        "feature_id_prefix": {"type": "string"},
+        "forbidden_claims": {"type": "array", "items": {"type": "string"}},
+        "sensitive_topics": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "reddit": {
+      "type": "object",
+      "required": ["priority_subreddits", "browser_access_required", "public_search_fallback"],
+      "properties": {
+        "priority_subreddits": {"type": "array", "items": {"type": "string"}},
+        "browser_access_required": {"type": "boolean"},
+        "public_search_fallback": {"enum": ["forbidden", "limited", "allowed"]},
+        "allow_product_mention": {"type": "boolean"},
+        "allow_links": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "approvals": {
+      "type": "object",
+      "required": ["core_research_updates", "draft_generation", "posting", "replies"],
+      "properties": {
+        "core_research_updates": {"enum": ["manual", "automatic"]},
+        "draft_generation": {"enum": ["manual", "gated", "automatic"]},
+        "posting": {"const": "manual"},
+        "replies": {"const": "manual"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

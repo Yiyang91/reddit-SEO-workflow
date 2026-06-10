@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "project": {
+    "name": "Example Product",
+    "summary": "A concise product summary.",
+    "target_users": ["Example target user"],
+    "stage": "beta",
+    "language": "en"
+  },
+  "paths": {
+    "workflow_root": "ops/reddit-workflow",
+    "primary_product_sources": ["README.md", "docs", "app"],
+    "derived_product_sources": []
+  },
+  "product": {
+    "feature_id_prefix": "F",
+    "forbidden_claims": ["Treatment or diagnosis claims"],
+    "sensitive_topics": ["Crisis contexts"]
+  },
+  "reddit": {
+    "priority_subreddits": ["r/example"],
+    "browser_access_required": true,
+    "public_search_fallback": "forbidden",
+    "allow_product_mention": false,
+    "allow_links": false
+  },
+  "approvals": {
+    "core_research_updates": "manual",
+    "draft_generation": "gated",
+    "posting": "manual",
+    "replies": "manual"
+  }
+}

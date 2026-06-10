@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "project": {
+    "name": "Feelune",
+    "summary": "A reflective reading app where passages become the starting point for noticing emotions.",
+    "target_users": ["Readers interested in emotional reflection"],
+    "stage": "pre-launch",
+    "language": "zh-CN"
+  },
+  "paths": {
+    "workflow_root": "ops/reddit-workflow",
+    "primary_product_sources": [
+      "README.md",
+      "README.zh.md",
+      "docs",
+      "app",
+      "web",
+      "marketing",
+      "supabase"
+    ],
+    "derived_product_sources": [
+      "ops/product/feelune_product_feature_selling_point_checklist.md"
+    ]
+  },
+  "product": {
+    "feature_id_prefix": "F",
+    "forbidden_claims": [
+      "Therapy",
+      "Diagnosis",
+      "Treatment",
+      "Guaranteed emotional insight"
+    ],
+    "sensitive_topics": ["Crisis", "Clinical mental health", "Grief-heavy contexts"]
+  },
+  "reddit": {
+    "priority_subreddits": ["r/Journaling", "r/Poetry", "r/books"],
+    "browser_access_required": true,
+    "public_search_fallback": "forbidden",
+    "allow_product_mention": true,
+    "allow_links": false
+  },
+  "approvals": {
+    "core_research_updates": "manual",
+    "draft_generation": "gated",
+    "posting": "manual",
+    "replies": "manual"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reddit Research Workflow"
+  short_description: "Evidence-first Reddit research and content workflow"
+  default_prompt: "Use $reddit-workflow to initialize or run the Reddit research workflow for this project."

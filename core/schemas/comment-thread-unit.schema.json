@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Comment Thread Unit",
+  "type": "object",
+  "required": [
+    "comment_unit_id",
+    "thread_id",
+    "subreddit",
+    "reddit_url",
+    "top_level_comment",
+    "revealed_user_tension",
+    "confidence",
+    "access_method"
+  ],
+  "properties": {
+    "comment_unit_id": {"type": "string"},
+    "thread_id": {"type": "string"},
+    "subreddit": {"type": "string"},
+    "reddit_url": {"type": "string"},
+    "top_level_comment": {"type": "string"},
+    "replies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["snippet", "contribution"],
+        "properties": {
+          "snippet": {"type": "string"},
+          "contribution": {"enum": ["supports", "expands", "challenges", "reframes"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "revealed_user_tension": {"type": "string"},
+    "pain_point_candidate": {"type": "string"},
+    "confidence": {"enum": ["low", "medium", "high"]},
+    "similar_user_count_observed": {"type": "integer", "minimum": 1},
+    "recurrence_level": {"enum": ["isolated", "repeated", "recurring", "strong"]},
+    "reply_discussion_present": {"type": "boolean"},
+    "reply_discussion_value": {"enum": ["none", "low", "medium", "high"]},
+    "keep_reason": {"type": "string"},
+    "permalink": {"type": ["string", "null"]},
+    "access_method": {"type": "string"}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,8 @@
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+*.tmp
+*.log
+screenshots/
+browser-cache/

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reddit Workflow Run Record",
+  "type": "object",
+  "required": ["schema_version", "run_id", "run_type", "date", "project_name", "status"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "run_id": {"type": "string"},
+    "run_type": {"enum": ["daily", "old-popular", "c4", "c5", "core-update-review"]},
+    "date": {"type": "string", "format": "date"},
+    "project_name": {"type": "string"},
+    "status": {"enum": ["started", "completed", "limited", "blocked"]},
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": true
+}
