@@ -12,6 +12,20 @@ PACKAGE_ROOT = SCRIPT_DIR.parent
 TEMPLATE_ROOT = PACKAGE_ROOT / "templates" / "project-workspace"
 
 
+def copy_missing_templates(destination_root: Path) -> list[str]:
+    created = []
+    for source in TEMPLATE_ROOT.rglob("*"):
+        relative = source.relative_to(TEMPLATE_ROOT)
+        destination = destination_root / relative
+        if source.is_dir():
+            destination.mkdir(parents=True, exist_ok=True)
+        elif not destination.exists():
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+            created.append(str(relative))
+    return created
+
+
 def build_profile(args: ArgumentParser, project_root: Path, workflow_root: Path) -> dict:
     return {
         "schema_version": 1,
@@ -75,6 +89,11 @@ def main() -> int:
     )
     parser.add_argument("--allow-product-mention", action="store_true")
     parser.add_argument("--allow-links", action="store_true")
+    parser.add_argument(
+        "--adopt-existing",
+        action="store_true",
+        help="Add a profile and only missing templates to an existing workflow.",
+    )
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
 
@@ -92,8 +111,21 @@ def main() -> int:
     if profile_path.exists() and not args.force:
         parser.error(f"Profile already exists: {profile_path}. Use --force to replace it.")
 
+    existing_items = []
+    if workflow_root.exists():
+        existing_items = [
+            item
+            for item in workflow_root.iterdir()
+            if item.name != "project-profile.json"
+        ]
+    if existing_items and not args.adopt_existing and not profile_path.exists():
+        parser.error(
+            "Existing workflow data found. Re-run with --adopt-existing after "
+            "reviewing the proposed profile. Existing files will not be overwritten."
+        )
+
     workflow_root.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(TEMPLATE_ROOT, workflow_root, dirs_exist_ok=True)
+    created_templates = copy_missing_templates(workflow_root)
     (workflow_root / "runs").mkdir(exist_ok=True)
 
     profile = build_profile(args, project_root, workflow_root)
@@ -103,6 +135,9 @@ def main() -> int:
     )
     print(f"Created Reddit workflow workspace: {workflow_root}")
     print(f"Created project profile: {profile_path}")
+    if args.adopt_existing:
+        print("Adopted existing workflow without overwriting existing files.")
+    print(f"Added {len(created_templates)} missing template file(s).")
     return 0
 
 

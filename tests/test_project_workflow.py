@@ -107,6 +107,43 @@ def main() -> int:
             print("ERROR: migration did not restore missing structure.")
             return 1
 
+        legacy_project = Path(directory) / "legacy-project"
+        legacy_workflow = legacy_project / "ops" / "reddit-workflow"
+        legacy_workflow.mkdir(parents=True)
+        legacy_log = legacy_workflow / "research" / "reddit-research-log.md"
+        legacy_log.parent.mkdir()
+        original_evidence = "# Existing Evidence\n\nDo not overwrite.\n"
+        legacy_log.write_text(original_evidence, encoding="utf-8")
+
+        refused = run(
+            str(SCRIPTS / "initialize_project.py"),
+            "--project-root",
+            str(legacy_project),
+            "--summary",
+            "Legacy product",
+        )
+        if refused.returncode == 0:
+            print("ERROR: existing workflow was initialized without adoption approval.")
+            return 1
+
+        adopted = run(
+            str(SCRIPTS / "initialize_project.py"),
+            "--project-root",
+            str(legacy_project),
+            "--summary",
+            "Legacy product",
+            "--adopt-existing",
+        )
+        if adopted.returncode:
+            print(adopted.stdout, adopted.stderr)
+            return 1
+        if legacy_log.read_text(encoding="utf-8") != original_evidence:
+            print("ERROR: adoption overwrote existing evidence.")
+            return 1
+        if not (legacy_workflow / "project-profile.json").is_file():
+            print("ERROR: adoption did not create a project profile.")
+            return 1
+
     print("Project workflow regression checks passed.")
     return 0
 

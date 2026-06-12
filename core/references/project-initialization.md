@@ -50,6 +50,10 @@ When `ops/reddit-workflow/` already contains a pre-plugin workflow:
    unnecessary.
 7. Validate before normal operation.
 
+Use `initialize_project.py --adopt-existing` after profile approval. This mode
+adds the profile and missing blank templates only. It must not replace any
+existing file.
+
 Do not reduce a mature project to empty templates.
 
 ## Data Separation

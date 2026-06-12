@@ -15,7 +15,9 @@ facts, evidence, strategy, drafts, and run records.
 2. Look for `ops/reddit-workflow/project-profile.json`.
 3. If it is missing, read `references/project-initialization.md`, run
    `scripts/scan_project.py`, inspect primary project sources, propose a
-   profile, and initialize only after approval.
+   profile, and initialize only after approval. When a populated workflow
+   directory already exists, use `--adopt-existing`; never run a destructive
+   fresh initialization over it.
 4. If it exists, read it before opening Reddit, classifying evidence, matching
    product features, or generating content.
 5. Run `scripts/validate_project.py` before substantive work.
