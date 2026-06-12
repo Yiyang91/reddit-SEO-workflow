@@ -1,6 +1,10 @@
 # Product Feature Source Map
 
-Primary product sources must be listed in `project-profile.json`. Derived summaries cannot be the sole authority for public claims.
+Primary product sources listed in `project-profile.json` decide current facts.
+Derived summaries cannot independently authorize public claims.
 
-| Feature ID | Feature or claim | Source status | Primary evidence | Conflict notes | Public wording |
-| --- | --- | --- | --- | --- | --- |
+Source status: primary verified / partial / derived only / conflict /
+unsupported.
+
+| Feature ID | Feature/claim | Source status | Primary evidence | Derived reference | Availability/limits | Conflict | Allowed wording | Forbidden wording |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |

@@ -1,6 +1,8 @@
 # Reddit Research and Content Workflow
 
-An evidence-first, project-configurable workflow for Reddit research, product matching, Reddit-native content preparation, and post-publication learning.
+A complete, evidence-first, project-configurable workflow for Reddit research,
+product matching, Reddit-native content preparation, posting checks, and
+post-publication learning.
 
 ## Repository Status
 
@@ -54,6 +56,25 @@ ops/reddit-workflow/
 ```
 
 The Skill scans the project first, then asks only for material information that cannot be inferred safely.
+
+## Full Workflow Coverage
+
+The plugin preserves the complete operating model:
+
+- neutral fresh-post and old-popular research tracks
+- authenticated comment-thread evidence and A3 sampling rules
+- duplicate and revisit gates
+- pain-point and cumulative recurrence maintenance
+- primary-versus-derived product source hierarchy
+- Product-Match Gate
+- C0-C5 Reddit content and monitoring stages
+- Light and Full review rules
+- explicit human approval boundaries
+- complete command contracts, file responsibilities, and run templates
+
+Detailed methodology lives under `core/references/` and is copied into the
+installed Skill. Project data remains in each project's
+`ops/reddit-workflow/`.
 
 ## Project Upgrades
 

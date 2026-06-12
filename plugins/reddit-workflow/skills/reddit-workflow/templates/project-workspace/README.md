@@ -1,7 +1,19 @@
 # Project Reddit Workflow
 
-This directory stores project-owned Reddit research, strategy, content preparation, and run records.
+This directory owns this project's Reddit research, strategy, content
+preparation, and run history.
 
-The installed Skill supplies methodology and scripts. This directory supplies project facts and accumulated evidence.
+The installed `$reddit-workflow` Skill supplies methodology, command
+contracts, schemas, templates, and helper scripts. This directory supplies
+project facts and accumulated evidence.
 
-Do not copy research data between projects.
+Start with `project-profile.json` and `research/reddit-research-plan.md`.
+
+Core rules:
+
+- research neutrally before product matching
+- write working findings to `runs/` first
+- require the Product-Match Gate before a product-mentioned draft
+- update core research only after the configured approval
+- do not post or reply automatically
+- do not copy research data between projects

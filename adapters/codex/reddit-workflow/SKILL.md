@@ -1,68 +1,84 @@
 ---
 name: reddit-workflow
-description: Initialize and operate an evidence-first Reddit research and Reddit-only content workflow for any product project. Use when the user asks to initialize a Reddit workflow, scan fresh Reddit posts, deep-read old popular threads, classify pain points, update cumulative recurrence, run a Product-Match Gate, prepare Reddit posts or replies, perform final subreddit checks, or monitor published Reddit output.
+description: Initialize and operate a project-owned, evidence-first Reddit research and Reddit-only content workflow. Use for project onboarding, workflow preparation, fresh-post scans, old-popular backlog sweeps, comment-thread evidence collection, pain-point classification, recurrence updates, Product-Match Gates, Reddit angle or draft preparation, C2/C3 review, C4 final posting checks, C5 monitoring, approved research updates, or workflow migrations.
 ---
 
 # Reddit Workflow
 
-## Start With Project Context
+Treat the installed Skill as methodology and tooling. Treat
+`ops/reddit-workflow/` inside the target project as the only home for project
+facts, evidence, strategy, drafts, and run records.
 
-Locate the repository root. Look for `ops/reddit-workflow/project-profile.json`.
+## Resolve Context
 
-If it is missing:
+1. Locate the project root.
+2. Look for `ops/reddit-workflow/project-profile.json`.
+3. If it is missing, read `references/project-initialization.md`, run
+   `scripts/scan_project.py`, inspect primary project sources, propose a
+   profile, and initialize only after approval.
+4. If it exists, read it before opening Reddit, classifying evidence, matching
+   product features, or generating content.
+5. Run `scripts/validate_project.py` before substantive work.
 
-1. Run `scripts/scan_project.py --project-root <repo-root>`.
-2. Read `references/project-initialization.md`.
-3. Read likely primary product sources discovered by the scan.
-4. Ask only for material fields that cannot be inferred safely:
-   - product summary and target users
-   - product stage and language
-   - forbidden claims and sensitive topics
-   - priority subreddits
-   - product mention and link policy
-   - draft-generation approval mode
-5. Show the proposed profile and workspace path.
-6. Initialize only after the user approves the proposed configuration.
-7. Run `scripts/validate_project.py`.
+Never copy evidence, pain points, product facts, drafts, or recurrence values
+between projects.
 
-Never copy evidence, pain points, drafts, or product facts from another project.
+## Load The Governing Contract
 
-## Route The Command
+Always read `references/command-contracts.md` and the command-specific
+references below before executing a workflow command.
 
-- `Prepare Reddit workflow task`: validate structure, profile, duplicate URLs, and current recurrence without modifying project data.
-- `Run Daily Reddit Workflow`: scan fresh posts neutrally, write the run file, and enter A -> B -> C0 -> C1 -> C2 -> C3 only when evidence and gates justify it.
-- `Run Old Popular Backlog Sweep`: deep-read old high-discussion threads using browser-opened comments and the sampling rules.
-- `Review run for core updates`: propose research database updates without applying them.
-- `Apply approved core updates`: apply only approved evidence changes, then validate.
-- `Run C4 Final Posting Check`: check live subreddit rules and prepare a posting decision without posting.
-- `Run C5 Monitoring`: monitor published output without replying automatically.
-- `Upgrade Reddit Workflow Project`: run `scripts/migrate_project.py` in preview mode first and apply only after approval.
+| Command or task | Required references |
+| --- | --- |
+| Prepare Reddit workflow task | `file-contracts.md`, `review-approval.md` |
+| Run Daily Reddit Workflow | `research-methodology.md`, `recurrence-rules.md`, `content-pipeline.md`, `product-match-gate.md`, `reddit-safety.md` |
+| Run Old Popular Backlog Sweep | `research-methodology.md`, `recurrence-rules.md`, `reddit-safety.md`, then B/C references only if a test pipeline is justified |
+| Review run for core updates | `research-methodology.md`, `recurrence-rules.md`, `review-approval.md` |
+| Apply approved core updates | `file-contracts.md`, `recurrence-rules.md`, `review-approval.md` |
+| Run C4 Final Posting Check | `content-pipeline.md`, `product-match-gate.md`, `reddit-safety.md` |
+| Run C5 Monitoring | `content-pipeline.md`, `recurrence-rules.md`, `review-approval.md` |
+| Upgrade Reddit Workflow Project | `project-initialization.md`, `file-contracts.md` |
 
-## Load References As Needed
+When detailed rationale, examples, file ownership, or team review criteria are
+needed, also read `references/operations-manual.md`.
 
-- Read `references/research-methodology.md` and `references/recurrence-rules.md` for Stage A work.
-- Read `references/product-match-gate.md` before Stage B or any product-mentioned output.
-- Read `references/content-pipeline.md` for C0-C5.
-- Read `references/reddit-safety.md` before public-facing decisions.
+## Execute In Stage Order
+
+- Stage A: collect visible Reddit evidence neutrally.
+- Stage B: match classified pain points to verified product features.
+- C0: create Reddit-native angle candidates.
+- C1: create a Standalone Reddit Post or Reply Comment candidate.
+- C2: run Light or Full editorial and risk review.
+- C3: prepare safest/growth/postpone/do-not-post decisions.
+- C4: check live subreddit context before posting; never post automatically.
+- C5: monitor published output and propose learning updates; never reply
+  automatically.
+
+Do not skip directly from a user pain point to product content. Preserve the
+traceability chain from visible evidence through classification, recurrence,
+product match, content decision, and review.
 
 ## Browser Evidence
 
-Use authenticated browser control when the project profile requires it. Read visible Reddit pages and comments directly. Do not substitute public JSON, search snippets, or indexed excerpts when the profile forbids fallback.
+Use authenticated browser control when required by the profile. Formal
+comment-thread evidence must come from visible Reddit pages and comments.
+Never substitute search snippets, public JSON, or indexed excerpts when the
+profile forbids fallback. If comments are inaccessible, record the limitation
+and stop or replace the candidate. Never invent comments.
 
-If authenticated browser access or comments are unavailable, stop the evidence pass and record the limitation. Never invent comments.
+## Data And Approval Boundaries
 
-## Project Data Boundaries
+- Write working findings to a run file first.
+- Do not update core research files without the configured approval and the
+  user's explicit approval.
+- Do not overwrite existing run files; create a versioned filename.
+- Do not use unresolved or derived-only product claims in public content.
+- Do not post, reply, commit, push, deploy, or publish unless explicitly
+  requested and separately authorized.
+- Keep all output Reddit-only.
 
-- Write accumulated evidence only inside the target project's workflow workspace.
-- Do not modify the installed Skill or Plugin during a project run.
-- Do not update core research files unless the configured approval rule and user approval allow it.
-- Do not post or reply automatically.
-- Do not commit or push unless explicitly requested.
+## Deterministic Tools
 
-## Product Claims
-
-Read primary product sources listed in `project-profile.json` before relying on derived summaries. Run the Product-Match Gate before any product-mentioned draft. Mark unresolved conflicts and omit disputed claims.
-
-## Output Discipline
-
-Keep Stage A neutral. Preserve traceability from evidence through product matching to content. Prefer observe-only, reply-only, postpone, or do-not-post when evidence or safety gates fail.
+Use bundled scripts for scanning, initialization, validation, duplicate URL
+checks, recurrence summaries, run-file generation, and migrations. Scripts do
+not replace browser reading or human/model judgment.

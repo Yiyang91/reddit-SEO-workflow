@@ -11,6 +11,20 @@ PACKAGE_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_ROOT = PACKAGE_ROOT / "templates"
 
 
+def available_output(runs_dir: Path, desired_name: str, force: bool) -> Path:
+    desired = runs_dir / desired_name
+    if force or not desired.exists():
+        return desired
+    stem = desired.stem
+    suffix = desired.suffix
+    version = 2
+    while True:
+        candidate = runs_dir / f"{stem}-v{version}{suffix}"
+        if not candidate.exists():
+            return candidate
+        version += 1
+
+
 def main() -> int:
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("--workflow-root", required=True)
@@ -33,11 +47,9 @@ def main() -> int:
         "old-popular": f"old-popular-sweep-{args.date}.md",
         "c5": f"c5-log-{args.draft_id}.md",
     }[args.type]
-    output = root / "runs" / output_name
-    output.parent.mkdir(exist_ok=True)
-    if output.exists() and not args.force:
-        print(f"File already exists: {output}")
-        return 1
+    runs_dir = root / "runs"
+    runs_dir.mkdir(exist_ok=True)
+    output = available_output(runs_dir, output_name, args.force)
 
     text = (TEMPLATE_ROOT / template_name).read_text(encoding="utf-8")
     text = text.replace("{{DATE}}", args.date)

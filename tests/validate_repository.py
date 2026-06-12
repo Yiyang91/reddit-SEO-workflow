@@ -14,10 +14,21 @@ REQUIRED = [
     "core/schemas/project-profile.schema.json",
     "core/references/research-methodology.md",
     "core/references/project-initialization.md",
+    "core/references/command-contracts.md",
+    "core/references/file-contracts.md",
+    "core/references/operations-manual.md",
+    "core/references/review-approval.md",
+    "core/references/content-pipeline.md",
+    "core/references/product-match-gate.md",
+    "core/references/recurrence-rules.md",
+    "core/references/reddit-safety.md",
+    "core/templates/project-workspace/research/reddit-research-plan.md",
     "core/templates/project-workspace/research/reddit-research-log.md",
     "core/scripts/initialize_project.py",
     "core/scripts/migrate_project.py",
     "core/scripts/check_duplicate_urls.py",
+    "core/scripts/check_structure.py",
+    "core/scripts/summarize_recurrence.py",
     "adapters/codex/reddit-workflow/SKILL.md",
     "adapters/codex/reddit-workflow/agents/openai.yaml",
     "build/build_codex_plugin.py",
@@ -62,7 +73,12 @@ def main() -> int:
         "plugins/reddit-workflow/skills/reddit-workflow/scripts/initialize_project.py",
         "plugins/reddit-workflow/skills/reddit-workflow/scripts/migrate_project.py",
         "plugins/reddit-workflow/skills/reddit-workflow/references/project-initialization.md",
+        "plugins/reddit-workflow/skills/reddit-workflow/references/command-contracts.md",
+        "plugins/reddit-workflow/skills/reddit-workflow/references/operations-manual.md",
+        "plugins/reddit-workflow/skills/reddit-workflow/scripts/check_structure.py",
+        "plugins/reddit-workflow/skills/reddit-workflow/scripts/summarize_recurrence.py",
         "plugins/reddit-workflow/skills/reddit-workflow/templates/daily-run.md",
+        "plugins/reddit-workflow/skills/reddit-workflow/templates/project-workspace/research/reddit-research-plan.md",
     ]
     missing_generated = [item for item in generated if not (ROOT / item).is_file()]
     if missing_generated:
@@ -75,6 +91,14 @@ def main() -> int:
     )
     if duplicate_test.returncode:
         return fail("Duplicate URL regression checks failed.")
+
+    workflow_test = subprocess.run(
+        [sys.executable, str(ROOT / "tests" / "test_project_workflow.py")],
+        cwd=ROOT,
+        check=False,
+    )
+    if workflow_test.returncode:
+        return fail("Project workflow regression checks failed.")
 
     print("Repository validation passed.")
     return 0

@@ -1,19 +1,57 @@
 # Old Popular Backlog Sweep - {{DATE}}
 
 - Project: {{PROJECT_NAME}}
-- Threads selected:
-- Selection basis:
+- Operator:
+- Candidate list source:
+- Browser access:
 
-## Threads Reviewed
+## Candidate Ranking
+
+| Rank | Thread | Visible comments | Score | Reply density | Age | Discussion quality | Decision |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+
+## Selected And Skipped Threads
+
+- Selected threads and heat/discussion basis:
+- Hotter candidates skipped and reason:
+
+## Prior Sweep And Revisit Gate
+
+| Thread | Prior sweep status | Prior sampling scope | Complete? | Latest activity | 48h decision | New window |
+| --- | --- | --- | --- | --- | --- | --- |
+
+## Sampling Record
+
+| Thread | Visible comment count | Required sample | Actual sample | Replies inspected | Limitation |
+| --- | --- | --- | --- | --- | --- |
 
 ## Comment-Thread Units
 
-## Pain Point Classification
+| CTU ID | Thread/RRL ID | Tension | Replies add | Similar users | Recurrence | Keep reason |
+| --- | --- | --- | --- | --- | --- | --- |
 
-## Cumulative Recurrence Draft
+## Neutral Pain-Point Classification
 
-## B-Stage Candidate
+| CTU ID | Classification | Pain Point/Cluster | New nuance | Confidence |
+| --- | --- | --- | --- | --- |
 
-## C0-C3 Test
+## Cumulative Recurrence Proposal
+
+## Optional B/C Test
+
+### A-Stage Basis
+
+### B-Stage Product-Match Gate
+
+### C0 Angle
+
+### C1 Candidate
+
+### C2 Review
+
+### C3 Posting Prep
 
 ## Recommendation
+
+- core-update review / observe only / reply-only / standalone candidate / postpone / do not post
+- Reason:

@@ -1,3 +1,12 @@
 # Content Angle Bank
 
-Every angle must include A-stage basis, B-stage basis, Reddit reader tension, product mention level, and evidence alignment notes.
+Every C0 angle includes:
+
+- Angle ID
+- A-stage cluster, pain point, evidence IDs, strength, and conclusion
+- B-stage features, match strength, valid scope, limits, and prohibited claims
+- Reddit reader tension
+- core angle and intended output type
+- product mention and link policy
+- evidence-alignment and safety notes
+- status

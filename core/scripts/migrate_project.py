@@ -8,9 +8,20 @@ must never rewrite accumulated research evidence, pain points, or drafts.
 from argparse import ArgumentParser
 import json
 from pathlib import Path
+import shutil
 
 
 CURRENT_SCHEMA_VERSION = 1
+PACKAGE_ROOT = Path(__file__).resolve().parent.parent
+TEMPLATE_ROOT = PACKAGE_ROOT / "templates" / "project-workspace"
+
+
+def template_files() -> dict[str, Path]:
+    return {
+        str(path.relative_to(TEMPLATE_ROOT)): path
+        for path in TEMPLATE_ROOT.rglob("*")
+        if path.is_file()
+    }
 
 
 def main() -> int:
@@ -31,8 +42,27 @@ def main() -> int:
     print(f"Workflow root: {root}")
 
     if version == CURRENT_SCHEMA_VERSION:
-        print(f"No migration required. schema_version={CURRENT_SCHEMA_VERSION}")
-        print("No files changed.")
+        missing = {
+            relative: source
+            for relative, source in template_files().items()
+            if not (root / relative).exists()
+        }
+        if not missing:
+            print(f"No migration required. schema_version={CURRENT_SCHEMA_VERSION}")
+            print("No files changed.")
+            return 0
+        print("Non-destructive structure additions available:")
+        for relative in sorted(missing):
+            print(f"- add missing file: {relative}")
+        if not args.apply:
+            print("Preview only. Re-run with --apply after approval.")
+            return 0
+        for relative, source in missing.items():
+            destination = root / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+        print(f"Added {len(missing)} missing file(s).")
+        print("Existing project files were not overwritten.")
         return 0
     if not isinstance(version, int):
         print(f"Unsupported schema_version: {version}")

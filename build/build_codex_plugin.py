@@ -33,16 +33,16 @@ def main() -> int:
 
     manifest = {
         "name": "reddit-workflow",
-        "version": "0.1.0",
-        "description": "Evidence-first Reddit research and Reddit-only content workflow",
+        "version": "1.0.0",
+        "description": "Full evidence-first Reddit research and Reddit-only content workflow",
         "author": {"name": "Yiyang91"},
         "skills": "./skills/",
         "interface": {
             "displayName": "Reddit Research Workflow",
-            "shortDescription": "Reusable Reddit research and content workflow",
+            "shortDescription": "Full Reddit research and content workflow",
             "longDescription": (
-                "Initialize and operate project-owned Reddit research, "
-                "product-match, content-preparation, and monitoring workflows."
+                "Faithful project-owned Reddit research, evidence sampling, "
+                "product-match, content-review, posting-check, and monitoring workflow."
             ),
             "developerName": "Yiyang91",
             "category": "Productivity",

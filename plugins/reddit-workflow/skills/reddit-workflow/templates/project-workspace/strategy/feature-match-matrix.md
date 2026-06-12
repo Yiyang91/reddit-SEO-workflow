@@ -1,4 +1,6 @@
 # Feature Match Matrix
 
-| Pain Point or Cluster ID | User tension | Relevant feature IDs | Match strength | Why valid | Why limited | What not to claim |
-| --- | --- | --- | --- | --- | --- | --- |
+Match strength: strong / medium / weak / no match / sensitive.
+
+| Pain Point/Cluster | Neutral tension | Feature IDs | Match | Why valid | Why limited | Source status | What not to claim |
+| --- | --- | --- | --- | --- | --- | --- | --- |
