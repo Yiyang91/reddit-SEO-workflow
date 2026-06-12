@@ -76,6 +76,24 @@ Detailed methodology lives under `core/references/` and is copied into the
 installed Skill. Project data remains in each project's
 `ops/reddit-workflow/`.
 
+## Detailed Documentation
+
+Start with [`WORKFLOW_DOCUMENTATION.md`](WORKFLOW_DOCUMENTATION.md) for the
+complete stage-by-stage map, reading order, project files, and links to every
+governing rule.
+
+The most important authoritative files are:
+
+- [`core/references/command-contracts.md`](core/references/command-contracts.md)
+- [`core/references/research-methodology.md`](core/references/research-methodology.md)
+- [`core/references/product-match-gate.md`](core/references/product-match-gate.md)
+- [`core/references/content-pipeline.md`](core/references/content-pipeline.md)
+- [`core/references/review-approval.md`](core/references/review-approval.md)
+- [`core/references/file-contracts.md`](core/references/file-contracts.md)
+
+The README commands are only triggers. The installed Skill loads these
+detailed contracts before executing the corresponding workflow stage.
+
 ## Project Upgrades
 
 Plugin upgrades replace the installed workflow code, not project-owned research
